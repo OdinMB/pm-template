@@ -1,6 +1,6 @@
 # PM Template
 
-A project management repo structure designed for use with [Claude Code](https://claude.com/claude-code). Organizes strategy, research, content, and operational planning into a convention-based folder layout that Claude can navigate and maintain autonomously.
+A project management repo structure designed for use with [Claude Code](https://claude.com/claude-code) (CLI, Desktop, or Cowork). Organizes strategy, research, content, and operational planning into a convention-based folder layout that Claude can navigate and maintain autonomously.
 
 This is **not** a code repo. It produces research briefs, marketing copy, grant applications, specs, pitches, and other non-code deliverables — using structured workflows, plan tracking, and living state documents.
 
@@ -57,14 +57,6 @@ Each folder has an `INDEX.md` that serves as the entry point — read the INDEX 
 | `/ops-batch-plan` | Write multiple plans in one session without stopping for input. |
 | `/ops-batch-execute` | Execute multiple plans in one session without stopping for input. |
 
-### Code Workflows (if paired with a code repo)
-
-| Command | What it does |
-|---------|-------------|
-| `/batch-plan` | Batch-write code implementation plans. |
-| `/batch-implement` | Batch-implement code plans with TDD. |
-| `/tdd` | Enforce test-driven development. |
-
 ### Maintenance
 
 | Command | What it does |
@@ -117,9 +109,75 @@ If this PM repo lives inside a code repo (e.g., `my-app/pm/`):
 
 1. Update the working directory section in `CLAUDE.md` to reference the parent (e.g., `../client/`, `../server/`).
 2. Add the PM folder's scope constraint to the parent repo's `CLAUDE.md`: "Never write, edit, or create files in `pm/`. Read only."
-3. The `/batch-plan` and `/batch-implement` commands are designed for the code repo context — they reference `/workflow` which resolves to the code development workflow at user level.
+
+## Sample: What a Mature Repo Looks Like
+
+Here's a real example from [Actually Relevant](https://actuallyrelevant.news), an AI-curated news platform. This shows how the folder structure grows organically as the project develops:
+
+```
+├── state/
+│   ├── INDEX.md
+│   ├── funding.md                          # Revenue, costs, grants received
+│   ├── recognition.md                      # Awards, credentials secured
+│   ├── handover.md                         # Stewardship readiness
+│   ├── audience/
+│   │   ├── INDEX.md
+│   │   ├── listings.md                     # 27 directory submissions, 4 live
+│   │   ├── socials.md                      # Platform presence
+│   │   ├── seo.md                          # Search visibility
+│   │   └── visitors.md                     # Traffic metrics
+│   └── platform/
+│       └── source-portfolio.md             # 82 active news sources
+│
+├── backlog/
+│   ├── INDEX.md
+│   ├── recognition.md                      # Awards and credentials to pursue
+│   ├── handover.md                         # Finding an institutional owner
+│   ├── audience/
+│   │   ├── listings.md                     # ~50 queued directory submissions
+│   │   ├── outreach.md                     # Media pitches, partner contacts
+│   │   └── community.md                    # Social engagement tasks
+│   └── grants/
+│       ├── INDEX.md
+│       └── (draft plans for upcoming applications)
+│
+├── references/
+│   ├── INDEX.md
+│   ├── potential-sources.md                # 95 vetted news sources
+│   ├── audience/
+│   │   ├── listings/                       # ~70 directories researched
+│   │   └── socials/                        # Platform analysis
+│   ├── grants/
+│   │   ├── opportunities.md                # 26-opportunity survey
+│   │   └── (deep dives on specific funds)
+│   ├── marketing/
+│   │   ├── talking-points.md
+│   │   ├── competitors/                    # 6 competitor analyses
+│   │   └── personas/                       # 5 target audience personas
+│   ├── partners/                           # Outreach research by sector
+│   ├── recognition/                        # 20 opportunities researched
+│   └── legal/                              # Compliance research
+│
+├── artifacts/
+│   ├── INDEX.md
+│   ├── grants/
+│   │   └── 2026-02-16_eaif-application.md  # Submitted (rejected)
+│   ├── pitches/                            # Outreach emails by audience
+│   ├── listings/                           # Directory submission copy
+│   ├── landing-pages/                      # Content specs for website
+│   ├── linkedin/                           # Social media posts
+│   └── open-source/                        # OSS launch materials
+│
+├── plans/
+│   ├── INDEX.md
+│   └── completed/                          # 14 archived plans with outcomes
+│       └── INDEX.md
+│
+├── CLAUDE.md
+└── MEMORY.md
+```
 
 ## Requirements
 
-- [Claude Code](https://claude.com/claude-code) CLI
+- [Claude Code](https://claude.com/claude-code) (CLI, Desktop, or Cowork)
 - Git (for plan tracking and batch operation branching)
