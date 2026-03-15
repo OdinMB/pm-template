@@ -1,8 +1,6 @@
 ---
-name: executive-overview
 description: Generate an executive overview of the project. Synthesizes state, backlogs, and recent plans into a ranked action plan answering "What should we do next?"
-disable-model-invocation: true
-argument-hint: [optional focus area]
+model: sonnet
 allowed-tools: Read, Glob, Grep
 ---
 
@@ -49,7 +47,17 @@ _Generated: <today's date>_
 
 A compact table showing key metrics at a glance. Pull numbers from state files. Use `—` for unknown values.
 
-**Derive areas from top-level state entries** (folders and files directly under `state/`). Each row corresponds to one top-level entry. Do NOT nest every sub-topic — only add `└` child rows for sub-areas where something particularly noteworthy is happening right now. Keep the dashboard to 3-5 top-level rows with 0-2 nested rows total.
+**Derive areas from top-level state entries** (folders and files directly under `state/`). Each row corresponds to one top-level entry. Do NOT nest every sub-topic — only add `└` child rows for sub-areas where something particularly noteworthy is happening right now (e.g., a recent launch, an upcoming deadline, a specific blocker). Most state areas should be a single row. Keep the dashboard to 3-5 top-level rows with 0-2 nested rows total.
+
+Example (do NOT copy these rows — derive your own from the actual state files):
+```
+| Area | Status | Detail |
+|------|--------|--------|
+| Audience | <emoji> <one-line summary> | <key number or trend> |
+| └ Social | <emoji> <one-line summary> | <only if noteworthy right now> |
+| Platform | <emoji> <one-line summary> | <what's new or notable> |
+| Handover | <emoji> <one-line summary> | <next milestone> |
+```
 
 Use these status emojis:
 - `>>` = strong momentum, active progress
@@ -80,7 +88,7 @@ Split recommendations into effort tiers. Maximum 3-4 items per tier. If a tier w
 
 #### Waiting For (optional — omit if none)
 
-Grep all files under `state/` and `backlog/` for the marker `WAITING (`. Surface them in a table:
+Grep all files under `state/` and `backlog/` for the marker `WAITING (`. Each match follows the format `WAITING (who/what, since YYYY-MM-DD)`. Items may appear in state files (action taken, awaiting external response) or backlog files (action still pending but blocked). Surface them in a table:
 
 ```
 ## Waiting For
@@ -118,9 +126,9 @@ If the user specified a focus area, add an additional section after "What to Do 
 
 ### Rules
 
-- **Do not write or modify any files.** This skill is read-only.
-- **Be concrete.** "Submit to X directory" is good. "Improve marketing" is not.
+- **Do not write or modify any files.** This command is read-only.
+- **Be concrete.** "Submit to public-apis repo" is good. "Improve marketing" is not.
 - **Reference sources.** When citing a backlog item, state file, or plan, mention the filename so the user can find it.
-- **Respect the project's constraints.** If MEMORY.md mentions resource limits, factor those into your recommendations.
-- **Don't repeat the backlog verbatim.** The user already has the backlog. Your job is to prioritize, connect, and recommend.
-- **Skip project introductions.** Don't describe what the project is. Start with where things are right now.
+- **Respect the project's constraints.** If MEMORY.md mentions resource limits (solo project, non-commercial, limited time), factor those into your recommendations. Don't recommend things that require a team of five.
+- **Don't repeat the backlog verbatim.** The user already has the backlog. Your job is to prioritize, connect, and recommend — not to copy-paste.
+- **Skip project introductions.** Don't describe what the project is. The user knows. Start with where things are right now.
